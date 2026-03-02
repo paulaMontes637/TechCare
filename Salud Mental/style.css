@@ -1,0 +1,1354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: #333;
+  background-color: #f8fafb;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #e1f5ee;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #238c6d;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+
+
+.nav-links a {
+  text-decoration: none;
+  color: #238c6d;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #146b53;
+}
+
+/* Estilos del botón hamburguesa (oculto por defecto) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  width: 30px;
+  height: 3px;
+  background-color: #238c6d;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* Responsive: Cuando la pantalla es menor a 768px */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex; /* Mostramos la hamburguesa */
+    z-index: 20;
+  }
+
+  .nav-links {
+    position: fixed;
+    right: -100%; /* Escondido a la derecha */
+    top: 70px;
+    background-color: #e1f5ee;
+    width: 100%;
+    height: calc(100vh - 70px);
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 2rem;
+    transition: 0.5s;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Clase que activaremos con JS para mostrar el menú */
+  .nav-links.active {
+    right: 0;
+  }
+}
+/* ===== SLIDER DESLIZANTE HACIA LA IZQUIERDA ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* 3 imágenes */
+  height: 100%;
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Contenido del hero */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* --- Ajustes Base --- */
+.hero {
+    position: relative;
+    height: 100vh; /* Se mantiene a pantalla completa */
+    min-height: 500px; /* Evita que se encoja demasiado en móviles horizontales */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center; /* Centra la imagen siempre */
+    flex-shrink: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    width: 90%; /* Ocupa casi todo el ancho en móviles */
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5); /* Oscurecemos un poco más para legibilidad */
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* --- RESPONSIVE DEL HERO --- */
+@media (max-width: 768px) {
+    .hero {
+        height: 80vh; /* En móvil reducimos un poco el alto para ver contenido abajo */
+    }
+
+    .hero h1 {
+        font-size: 1.6rem !important; /* Texto más pequeño para que no se amontone */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 1rem !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column; /* Botones uno encima del otro */
+        gap: 12px;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%; /* Botones de ancho completo para facilitar el clic */
+        max-width: 300px;
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Botón principal */
+.btn {
+  background-color: #fff;
+  color: #238c6d;
+  padding: 0.8rem 1.6rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background-color: #238c6d;
+  color: white;
+}
+
+/* ===== SECCIÓN AYUDA INMEDIATA ===== */
+.help-now {
+  background: linear-gradient(135deg, #f4f9f8, #e8f3f1);
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.help-container {
+  max-width: 800px;
+  text-align: center;
+  background: #ffffff;
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.help-container:hover {
+  transform: translateY(-5px);
+}
+
+.help-container h2 {
+  font-size: 2rem;
+  color: #1f3a3d;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.help-container p {
+  font-size: 1.1rem;
+  color: #5f6f72;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* ===== BOTONES ===== */
+.help-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: #2bb673;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(43, 182, 115, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #239c61;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(43, 182, 115, 0.4);
+}
+
+/* Botón emergencia */
+.btn-emergency {
+  background-color: #ff5a5f;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(255, 90, 95, 0.3);
+}
+
+.btn-emergency:hover {
+  background-color: #e0484d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 90, 95, 0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .help-container {
+    padding: 35px 25px;
+  }
+
+  .help-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .help-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.ayuda-section {
+  background: linear-gradient(to bottom, #e6f4f1, #ffffff);
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.ayuda-section h2 {
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: #2c3e50;
+}
+
+.cards-ayuda {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card-ayuda {
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.card-ayuda:hover {
+  transform: translateY(-8px);
+}
+
+.card-ayuda img {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.card-ayuda h3 {
+  margin-bottom: 15px;
+  color: #1b6f6a;
+}
+
+.card-ayuda p {
+  font-size: 14px;
+  color: #555;
+}
+
+
+/* Secciones */
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.section.alt {
+  background-color: #e1f5ee;
+}
+
+/* Tarjetas */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 70px;
+  margin-bottom: 1rem;
+}
+
+/* Recursos */
+.recursos-lista {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.recursos-lista li {
+  margin: 0.8rem 0;
+}
+
+.recursos-lista a {
+  color: #238c6d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Formulario de contacto */
+.contact-form {
+  margin-top: 1.5rem;
+}
+
+.contact-form input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  width: 250px;
+  margin-right: 0.5rem;
+}
+
+/* Footer */
+footer {
+  background-color: #238c6d;
+  color: white;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 3rem;
+}
+
+/* Frases motivacionales */
+#frase {
+  font-size: 1.3rem;
+  font-style: italic;
+  transition: opacity 0.6s ease-in-out;
+  opacity: 1;
+  margin: 1.5rem auto;
+  max-width: 600px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content {
+    padding: 1.5rem;
+  }
+}
+
+#chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #238c6d;
+  color: white;
+  font-size: 1.8rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+#chatbot-button:hover {
+  transform: scale(1.1);
+}
+
+#chatbot-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 360px;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  background: white;
+  display: none;
+  z-index: 999;
+}
+
+#chatbot-widget iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#chatbot-widget.open {
+  display: block;
+}
+
+
+/* ========================================= */
+/* ✨ ESTILOS MODERNOS Y LIMPIOS (Verde Menta) */
+/* Reemplaza la sección del foro en tu style.css con este código. */
+/* ========================================= */
+
+/* Tipografía y Fondo General */
+body { 
+    background-color: #f7f9fc; /* Fondo muy claro y suave */
+    color: #333333; 
+    font-family: 'Inter', sans-serif; /* Fuente limpia y moderna */
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Contenedor Principal */
+.foro-wrap { 
+    max-width: 980px; 
+    margin: 40px auto; 
+    padding: 24px; 
+    padding-top: 0;
+}
+
+/* Encabezado */
+.foro-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 12px; 
+    margin-bottom: 30px; /* Más espacio */
+    padding: 20px 0 10px 0;
+    border-bottom: 1px solid #eeeeee; /* Separador sutil */
+}
+
+.foro-header h1 { 
+    margin: 0; 
+    font-size: 2rem; /* Título más grande */
+    color: #1a1a1a; /* Negro para alto contraste */
+    font-weight: 800;
+}
+
+/* Botones Generales */
+.btn { 
+    cursor: pointer; 
+    border: none;
+    background-color: #1abc9c; /* 🌿 COLOR VERDE MENTA */
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+    text-decoration: none; /* Para el botón "Volver" */
+    display: inline-block;
+}
+.btn:hover {
+    background-color: #16a085; /* Tono de menta más oscuro para el hover */
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+/* --- Área de Nombre/Perfil --- */
+.nombre-box { 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra más limpia */
+    display: flex; 
+    gap: 15px; 
+    align-items: center; 
+    border-left: 5px solid #1abc9c; /* 🌿 BORDE DE ACENTO VERDE MENTA */
+}
+
+.nombre-box input { 
+    padding: 12px; 
+    border-radius: 6px; 
+    border: 1px solid #dddddd; 
+    flex: 1; 
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+.nombre-box input:focus {
+    border-color: #1abc9c; /* 🌿 FOCO VERDE MENTA */
+    outline: none;
+}
+
+.small { 
+    font-size: 0.85rem; 
+    color: #6c757d; 
+}
+
+/* Botones en el área de nombre */
+#cambiar-nombre {
+    background: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    color: #333 !important;
+    padding: 8px 15px !important;
+    border-radius: 6px !important;
+}
+#cambiar-nombre:hover {
+    background: #e9ecef !important;
+}
+
+/* --- Formulario de Publicación --- */
+.publicar-box { 
+    margin-top: 30px; 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+}
+
+.publicar-box textarea { 
+    width: 100%; 
+    min-height: 100px; /* Más alto */
+    padding: 15px; 
+    border-radius: 6px; 
+    border: 1px solid #dddddd; 
+    resize: vertical; 
+    font-size: 1rem;
+    box-sizing: border-box; /* Importante para el 100% de ancho */
+    transition: border-color 0.2s;
+}
+.publicar-box textarea:focus {
+    border-color: #1abc9c; /* 🌿 FOCO VERDE MENTA */
+    outline: none;
+}
+
+.row { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+    margin-top: 15px; 
+}
+
+/* --- Listado de Mensajes (Posts) --- */
+.lista-mensajes { 
+    margin-top: 30px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; /* Más separación entre posts */
+}
+
+/* Estilo de cada Mensaje (La "Card" principal) */
+.mensaje { 
+    background: white; 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra más sutil */
+    display: flex; 
+    gap: 15px; 
+    align-items: flex-start; 
+    border: 1px solid #f0f0f0; /* Borde sutil para definir la tarjeta */
+}
+
+.avatar { 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 8px; /* Avatar cuadrado/redondeado moderno */
+    flex-shrink: 0; 
+    overflow: hidden; 
+    display: block; 
+}
+
+.contenido { 
+    flex: 1; 
+}
+
+.meta { 
+    display: flex; 
+    gap: 10px; 
+    align-items: baseline; /* Alinea los elementos en la línea de base */
+    margin-bottom: 8px; 
+}
+
+.nombre { 
+    font-weight: 700; 
+    color: #1a1a1a; 
+    font-size: 1rem;
+}
+
+.fecha { 
+    font-size: 0.8rem; 
+    color: #999999; 
+    margin-left: -5px; /* Ajuste visual */
+}
+
+.texto { 
+    margin-top: 5px; 
+    white-space: pre-wrap; 
+    color: #333333;
+    font-size: 1rem;
+}
+
+/* --- Acciones (Like, Responder, Eliminar) --- */
+.acciones { 
+    margin-top: 12px; 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
+    padding-top: 5px;
+    border-top: 1px solid #f7f7f7; /* Separador de acciones */
+}
+
+.accion-btn { 
+    background: transparent; 
+    border: 0; 
+    cursor: pointer; 
+    padding: 8px 10px; 
+    border-radius: 4px; 
+    font-weight: 500; 
+    color: #6c757d; /* Color gris suave */
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.accion-btn:hover { 
+    background: #f1f4f8; 
+    color: #1abc9c; /* 🌿 HOVER TEXTO VERDE MENTA */
+}
+.accion-btn.like-btn .like-count {
+    font-weight: 600;
+    color: #1abc9c; /* 🌿 CONTADOR VERDE MENTA */
+    margin-left: 3px;
+}
+.accion-btn.delete-btn {
+    color: #dc3545 !important;
+}
+.accion-btn.delete-btn:hover {
+    background: #f8d7da;
+}
+
+/* --- Respuestas (Replies) --- */
+.replies { 
+    margin-top: 15px; 
+    margin-left: 63px; /* Alineación debajo del contenido del post */
+    padding-left: 10px;
+    border-left: 3px solid #e9ecef; /* Barra lateral de indentación */
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.reply { 
+    background: #ffffff; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+}
+
+.reply-input { 
+    display: flex; 
+    gap: 8px; 
+    align-items: flex-end; 
+    margin-top: 10px; 
+}
+
+.reply-input textarea { 
+    flex: 1; 
+    min-height: 40px; 
+    border-radius: 6px; 
+    padding: 10px; 
+    border: 1px solid #dddddd;
+    resize: vertical;
+}
+
+.reply-input .btn {
+    padding: 8px 15px;
+}
+
+/* Media Queries (Responsive) */
+@media (max-width: 720px){
+    .foro-wrap {
+        margin: 20px 10px;
+        padding: 0;
+    }
+    .foro-header {
+        margin-bottom: 20px;
+    }
+    .mensaje { 
+        flex-direction: column; 
+        gap: 10px;
+    }
+    .avatar{ 
+        width: 40px; 
+        height: 40px; 
+    }
+    .replies { 
+        margin-left: 0; 
+        padding-left: 15px;
+    }
+    .meta {
+        align-items: center;
+    }}
+
+
+/* Estilos de Bienestar */
+
+/* ========================================= */
+/* ESTILOS ESPECÍFICOS PARA LA PÁGINA BIENESTAR */
+/* ========================================= */
+
+.banner-bienestar {
+    background: linear-gradient(rgba(35, 140, 109, 0.7), rgba(35, 140, 109, 0.8)), url('https://images.unsplash.com/photo-1517457375819-27718de50a80?auto=format&fit=crop&w=1920&q=80') center center / cover;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+    margin-bottom: 3rem;
+}
+
+.banner-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #238c6d;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* Detalle de Beneficios (Grid) */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.detail-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+    text-align: left;
+    border-top: 5px solid #238c6d;
+}
+
+.detail-card h3 {
+    color: #146b53;
+    margin-bottom: 0.7rem;
+}
+
+/* Acordeón (Hábitos) */
+.acordeon-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.acordeon-item {
+    margin-bottom: 15px;
+    border: 1px solid #c9e0d6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.acordeon-header {
+    width: 100%;
+    background-color: #e1f5ee;
+    color: #238c6d;
+    padding: 18px 25px;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.acordeon-header:hover {
+    background-color: #d0e7e0;
+}
+
+.acordeon-content {
+    padding: 0 25px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.acordeon-content.open {
+    max-height: 200px; /* Suficientemente grande para el contenido */
+    padding: 15px 25px;
+}
+
+/* CTAs */
+.cta-cards .card {
+    border-top: none;
+    border-bottom: 5px solid #238c6d;
+}
+
+.cta-cards .btn {
+    margin-top: 15px;
+    padding: 0.6rem 1.2rem;
+}
+
+
+.carousel-fade {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carousel-fade img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.carousel-fade img.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.card img.img-especialista {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Estilo del botón WhatsApp Menta */
+.btn-whatsapp {
+  display: block;
+  background-color: #1abc9c !important; /* El menta de tu foro */
+  color: white !important;
+  padding: 10px 15px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #16a085 !important; /* Un tono más oscuro al pasar el mouse */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+}
+
+@media (max-width: 992px) {
+    .carousel-fade {
+        width: 90%; /* Le damos más espacio a los lados */
+        height: 350px;
+    }
+}
+
+/* Para celulares (menos de 600px) */
+@media (max-width: 600px) {
+    .carousel-fade {
+        width: 95%; /* Casi todo el ancho */
+        height: 250px; /* Reducimos el alto para que no ocupe toda la pantalla */
+        margin: 10px auto;
+    }
+
+    .carousel-fade img {
+        object-fit: contain; /* ✨ IMPORTANTE: En celulares, 'contain' evita que se corten los bordes del dibujo */
+        background-color: #e1f5ee; /* Color de fondo para rellenar si la imagen es corta */
+    }
+}
+
+/* Contenedor principal del banner */
+.banner {
+  width: 100%;
+  overflow: hidden; /* Esto es vital para matar el scroll horizontal */
+  display: block;   /* Cambiamos flex por block para evitar estiramientos raros */
+  background-color: #f8fafb;
+  margin: 0;
+  padding: 0;
+}
+
+/* La imagen dentro del banner */
+.banner img {
+  width: 100%;          /* Ocupa el 100% del ancho del dispositivo */
+  max-width: 100%;      /* No permite que la imagen sea más grande que la pantalla */
+  height: auto;         /* Mantiene la proporción (evita que se vea aplastada) */
+  display: block;       /* Quita el espacio extra que dejan las imágenes por defecto */
+  margin: 0 auto;       /* La centra si llega al max-width */
+}
+
+/* Ajuste específico para pantallas muy grandes */
+@media (min-width: 1201px) {
+    .banner img {
+        max-width: 1200px; /* Solo se limita en monitores grandes */
+    }
+
+    html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Corta cualquier cosa que sobresalga a la derecha */
+  position: relative;
+}
+}
+
+/* Style bienestar */
+
+/* --- RESET Y BASE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: #333;
+  background-color: #f8fafb;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- NAVEGACIÓN --- */
+header {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #1abc9c;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #1abc9c;
+}
+
+/* --- BANNER BIENESTAR --- */
+.banner-bienestar {
+    background: linear-gradient(rgba(26, 188, 156, 0.8), rgba(22, 160, 133, 0.9)), 
+                url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+.banner-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* --- SECCIONES --- */
+.section { padding: 80px 20px; text-align: center; }
+.section.alt { background-color: #f0fdf9; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-title {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+/* --- GRID DE BENEFICIOS --- */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.detail-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: 0.3s ease;
+    border-top: 5px solid #1abc9c;
+}
+
+.detail-card:hover { transform: translateY(-10px); }
+.card-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+.detail-card h3 { color: #16a085; margin-bottom: 15px; }
+
+/* --- ACORDEÓN --- */
+.acordeon-container { max-width: 800px; margin: 0 auto; text-align: left; }
+.acordeon-item { background: white; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.acordeon-header {
+    width: 100%; padding: 20px; border: none; background: none;
+    text-align: left; font-size: 1.1rem; font-weight: 600; color: #16a085;
+    cursor: pointer; display: flex; justify-content: space-between;
+}
+.acordeon-content { max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 20px; }
+.acordeon-content.open { max-height: 200px; padding-bottom: 20px; }
+
+/* --- BOTONES Y FOOTER --- */
+.btn {
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-menta { background: #1abc9c; color: white; margin-top: 20px; }
+.btn-menta:hover { background: #16a085; transform: scale(1.05); }
+.btn-foro { background: #1abc9c; color: white; }
+
+footer { background: #16a085; color: white; padding: 30px; text-align: center; }
+
+/* --- CHATBOT --- */
+#chatbot-button {
+    position: fixed; bottom: 20px; right: 20px; background: #1abc9c;
+    width: 60px; height: 60px; border-radius: 50%; display: flex;
+    justify-content: center; align-items: center; color: white; font-size: 1.5rem;
+    cursor: pointer; z-index: 1000;
+}
+
+#chatbot-widget { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 450px; display: none; z-index: 1000; }
+#chatbot-widget.open { display: block; }
+#chatbot-widget iframe { width: 100%; height: 100%; border-radius: 15px; border: none; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+    .menu-toggle span { width: 25px; height: 3px; background: #1abc9c; }
+    .nav-links {
+        position: fixed; right: -100%; top: 70px; background: white;
+        width: 100%; height: 100vh; flex-direction: column; padding-top: 50px; transition: 0.4s;
+    }
+    .nav-links.active { right: 0; }
+    .banner-content h1 { font-size: 1.8rem; }
+}
+
+/* Estilo base del header del acordeón */
+.acordeon-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Añadimos una flecha con CSS */
+.acordeon-header::after {
+    content: '❯'; 
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: #1abc9c;
+}
+
+/* Estado cuando el acordeón está abierto (clase .active puesta por JS) */
+.acordeon-header.active {
+    color: #16a085;
+    background-color: #f0fdf9;
+}
+
+.acordeon-header.active::after {
+    transform: rotate(90deg); /* La flecha apunta hacia abajo al abrir */
+}
+
+.acordeon-content {
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+}
+
+/* Estilo específico para el botón Ver Video */
+.btn-video {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio para un futuro icono */
+    background-color: #ff5a5f; /* Color llamativo pero armonioso */
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 90, 95, 0.2);
+}
+
+.btn-video:hover {
+    background-color: #e0484d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 90, 95, 0.3);
+}
+
+.btn-video:active {
+    transform: translateY(0);
+}
+
+/* Agregamos un pequeño icono de "Play" usando CSS antes del texto */
+.btn-video::before {
+    content: '▶';
+    font-size: 0.7rem;
+}
+
+/* Estilos para la página de Especialistas */
+.section-especialistas-header {
+    background-color: #e1f5ee;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section-especialistas-header h1 {
+    color: #238c6d;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.grid-especialistas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.card-pro {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid #e1f5ee;
+}
+
+.card-pro:hover {
+    transform: translateY(-10px);
+}
+
+.card-pro img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-pro-info {
+    padding: 25px;
+}
+
+.card-pro-info h3 {
+    color: #146b53;
+    margin-bottom: 5px;
+}
+
+.tag {
+    background: #e1f5ee;
+    color: #238c6d;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.trayectoria {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.success-case {
+    background: #f0fdf9;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    border-left: 4px solid #238c6d;
+    margin-bottom: 20px;
+}
+
+.btn-menta {
+    background-color: #238c6d;
+    color: white;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+.btn-menta:hover {
+    background-color: #146b53;
+}

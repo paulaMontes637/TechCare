@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Especialistas - TechCare</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">💚 TechCare</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Bienestar.html">Blog</a></li>
+                <li><a href="especialistas.html" class="active">Especialistas</a></li>
+                <li><a href="foro.html" class="btn">🧵 Ir al Foro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-especialistas-header">
+            <div class="container">
+                <h1>Nuestros Especialistas</h1>
+                <p>Un equipo humano comprometido con tu salud emocional.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid-especialistas">
+                    <div class="card-pro">
+                        <img src="Medios/psicologa1.jpeg" alt="Dra. Luisa Benitez">
+                        <div class="card-pro-info">
+                            <h3>Dra. Luisa Benítez</h3>
+                            <span class="tag">Psicóloga Social</span>
+                            <p class="trayectoria">La Dra. Benítez es una figura clave en el tratamiento de trastornos del ánimo dentro de entornos comunitarios. Su enfoque se centra en cómo los factores sociales influyen en la salud mental individual. Con más de una década de experiencia, domina la terapia cognitivo-conductual, herramienta que utiliza para empoderar a sus pacientes frente a sus miedos.</p>
+                            <div class="success-case">
+                                <strong>Caso de éxito:</strong> Logró que más de 50 personas con fobia social severa lograran reintegrarse con éxito a actividades grupales y laborales, mejorando drásticamente su calidad de vida.
+                            </div>
+                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                        </div>
+                    </div>
+
+                    <div class="card-pro">
+                        <img src="Medios/psicologo2.jpeg" alt="Dr. Jhon Murillo">
+                        <div class="card-pro-info">
+                            <h3>Dr. Jhon Murillo</h3>
+                            <span class="tag">Psicólogo Clínico</span>
+                            <p class="trayectoria">El Dr. Murillo es un experto en la dinámica de las relaciones modernas. Su trabajo se especializa en la resolución de conflictos, especialmente aquellos que surgen o se intensifican a través de la comunicación en entornos digitales. Posee una habilidad innata para mediar y reconstruir la confianza en vínculos afectivos desgastados.</p>
+                            <div class="success-case">
+                                <strong>Caso de éxito:</strong> Fue el arquitecto del programa "Familias Conectadas", una iniciativa que logró reducir los niveles de aislamiento y soledad en jóvenes en un 30% mediante el fomento de una comunicación digital saludable.</p>
+                            </div>
+                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                        </div>
+                    </div>
+
+                    <div class="card-pro">
+                        <img src="Medios/psicologo3.jpeg" alt="Dra. Camilo Cruz">
+                        <div class="card-pro-info">
+                            <h3>Dr. Camilo Cruz</h3>
+                            <span class="tag">Psicólogo Jurídico</span>
+                            <p class="trayectoria">El Dr. Cruz aporta una visión técnica y analítica al equipo. Se especializa en la intersección entre la psicología y el rendimiento en entornos de alta presión. Su investigación se enfoca en cómo el estrés laboral afecta los procesos cognitivos superiores, como la toma de decisiones y la memoria, buscando siempre un equilibrio entre la productividad y el bienestar.</p>
+                            <div class="success-case">
+                                <strong>Caso de éxito:</strong>Diseñó e implementó un protocolo innovador de "pausas activas mentales" adoptado por grandes empresas tecnológicas, logrando una reducción significativa en los errores operativos causados por fatiga mental.</p>
+                            </div>
+                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 TechCare | Creado con 💚 para promover la salud mental</p>
+    </footer>
+
+    <script src="script-especialistas.js"></script>
+    <script>
+        // Mantenemos la funcionalidad del menú hamburguesa que ya tienes
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

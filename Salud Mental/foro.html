@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro — TechCare</title>
+
+  <!-- Conexion con el css -->
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body>
+  <div class="foro-wrap">
+    <div class="foro-header">
+      <h1>🧵 Foro Anónimo de la Comunidad</h1>
+      <a href="index.html" class="btn">← Volver al sitio</a>
+    </div>
+
+    <!-- Selector / cambio de nombre -->
+    <div id="nombre-area" class="nombre-box">
+      <img id="avatar-preview" class="avatar" src="" alt="avatar" />
+      <div style="flex:1;">
+        <input id="nombre-usuario" placeholder="Elige un nombre público (mínimo 3 caracteres)" />
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <button id="guardar-nombre" class="btn">Guardar nombre</button>
+          <button id="cambiar-nombre" class="btn" style="display:none;background:#fff;border:1px solid #e6f3ee;padding:8px 12px;border-radius:10px;">Cambiar</button>
+          <span id="nombre-guardado" class="small" style="margin-left:auto;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publicar -->
+    <div class="publicar-box" id="publicar-box" style="display:none;">
+      <textarea id="mensaje" placeholder="Comparte algo con la comunidad..."></textarea>
+      <div class="row">
+        <div style="flex:1;" class="small">Tu nombre será público: <strong id="nombre-mostrar"></strong></div>
+        <button id="publicar" class="btn">Publicar</button>
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div id="lista-mensajes" class="lista-mensajes"></div>
+  </div>
+
+  <!-- Firebase + lógica del foro -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp,
+      doc, updateDoc, arrayUnion, arrayRemove, deleteDoc, setDoc, getDoc, collection as coll
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // --- TU CONFIG (usa la misma que usas en index.html)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8lV5AWpT_Kgqr96DMxhNURQNki3OOsSg",
+      authDomain: "techcare-69995.firebaseapp.com",
+      projectId: "techcare-69995",
+      storageBucket: "techcare-69995.firebasestorage.app",
+      messagingSenderId: "270002418598",
+      appId: "1:270002418598:web:2695aa431575d0abfd5567",
+      measurementId: "G-3ZF4H9KGMX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    // UI
+    const nombreInput = document.getElementById("nombre-usuario");
+    const guardarNombreBtn = document.getElementById("guardar-nombre");
+    const cambiarNombreBtn = document.getElementById("cambiar-nombre");
+    const publicarBox = document.getElementById("publicar-box");
+    const publicarBtn = document.getElementById("publicar");
+    const mensajeTxt = document.getElementById("mensaje");
+    const listaMensajes = document.getElementById("lista-mensajes");
+    const nombreMostrar = document.getElementById("nombre-mostrar");
+    const nombreGuardadoSpan = document.getElementById("nombre-guardado");
+    const avatarPreview = document.getElementById("avatar-preview");
+
+    // estado
+    let usuario = null; // auth user
+    let nombre = localStorage.getItem("tc_nombre") || null;
+
+    // Avatares: dicebear identicon por nombre (si no existe nombre, avatar random por uid)
+    function avatarUrl(seed){
+      return `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(seed)}&scale=80`;
+    }
+
+    function actualizarAvatarPreview(){
+      const seed = nombre || (usuario ? usuario.uid : "guest");
+      avatarPreview.src = avatarUrl(seed);
+    }
+
+    // 1) autenticar anónimamente (persistente en navegador)
+    signInAnonymously(auth).catch((e)=> {
+      console.error("Error login anónimo:", e);
+      alert("No se pudo autenticar de forma anónima. Revisa la consola.");
+    });
+
+    onAuthStateChanged(auth, async (u) => {
+      usuario = u;
+      actualizarAvatarPreview();
+
+      // Si ya tenemos un nombre guardado en localStorage lo mostramos
+      if (nombre) {
+        nombreMostrar.textContent = nombre;
+        nombreGuardadoSpan.textContent = `Nombre: ${nombre}`;
+        nombreInput.style.display = "none";
+        guardarNombreBtn.style.display = "none";
+        cambiarNombreBtn.style.display = "inline-block";
+        publicarBox.style.display = "block";
+      }
+    });
+
+    // Guardar nombre elegido
+    guardarNombreBtn.addEventListener("click", async () => {
+      const val = nombreInput.value.trim();
+      if (!val || val.length < 3) return alert("Elige un nombre con al menos 3 caracteres.");
+      nombre = val;
+      // Guardamos en localStorage (no guardamos datos personales)
+      localStorage.setItem("tc_nombre", nombre);
+      // También opcionalmente guardamos un registro en Firestore /users/{uid}
+      if (usuario) {
+        try {
+          await setDoc(doc(db, "users", usuario.uid), {
+            displayName: nombre,
+            uid: usuario.uid,
+            createdAt: serverTimestamp()
+          }, { merge: true });
+        } catch (err) {
+          console.warn("No se pudo guardar user doc:", err);
+        }
+      }
+      nombreMostrar.textContent = nombre;
+      nombreGuardadoSpan.textContent = `Nombre: ${nombre}`;
+      nombreInput.style.display = "none";
+      guardarNombreBtn.style.display = "none";
+      cambiarNombreBtn.style.display = "inline-block";
+      publicarBox.style.display = "block";
+      actualizarAvatarPreview();
+    });
+
+    // Cambiar nombre
+    cambiarNombreBtn.addEventListener("click", () => {
+      nombreInput.style.display = "block";
+      guardarNombreBtn.style.display = "inline-block";
+      cambiarNombreBtn.style.display = "none";
+      publicarBox.style.display = "none";
+    });
+
+    // Publicar
+    publicarBtn.addEventListener("click", async () => {
+      const texto = mensajeTxt.value.trim();
+      if (!texto) return alert("Escribe un mensaje.");
+      if (!nombre) return alert("Elige un nombre antes de publicar.");
+
+      try {
+        await addDoc(collection(db, "foro"), {
+          nombre,
+          texto,
+          uid: usuario ? usuario.uid : null,
+          likes: [],
+          createdAt: serverTimestamp()
+        });
+        mensajeTxt.value = "";
+      } catch (err) {
+        console.error("Error publicando:", err);
+        alert("Error al publicar. Revisa consola.");
+      }
+    });
+
+    // Escuchar mensajes en tiempo real (ordenados por createdAt desc)
+    const q = query(collection(db, "foro"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snap) => {
+      listaMensajes.innerHTML = "";
+      snap.forEach(docSnap => {
+        const id = docSnap.id;
+        const d = docSnap.data();
+        renderMensaje(id, d);
+      });
+    });
+
+    // Renderiza un mensaje (simple)
+    function renderMensaje(id, d) {
+      const item = document.createElement("div");
+      item.className = "mensaje";
+      const seed = d.nombre || d.uid || id;
+      const avatar = avatarUrl(seed);
+
+      item.innerHTML = `
+        <img class="avatar" src="${avatar}" alt="avatar" />
+        <div class="contenido">
+          <div class="meta">
+            <div class="nombre">${escapeHtml(d.nombre || "Invitado")}</div>
+            <div class="fecha">${d.createdAt ? timeAgo(d.createdAt.toDate ? d.createdAt.toDate() : new Date()) : ""}</div>
+          </div>
+          <div class="texto">${escapeHtml(d.texto || d.mensaje || "")}</div>
+          <div class="acciones">
+            <button class="accion-btn like-btn">❤ <span class="like-count">${(d.likes && d.likes.length) || 0}</span></button>
+            <button class="accion-btn reply-toggle">Responder</button>
+            ${ (usuario && d.uid && usuario.uid === d.uid) ? `<button class="accion-btn delete-btn" style="color:#c33">Eliminar</button>` : "" }
+          </div>
+          <div class="replies" id="replies-${id}"></div>
+          <div class="reply-input" id="reply-input-${id}" style="display:none;">
+            <textarea placeholder="Escribe una respuesta..."></textarea>
+            <button class="btn send-reply">Enviar</button>
+          </div>
+        </div>
+      `;
+
+      // listeners (delegation)
+      const likeBtn = item.querySelector(".like-btn");
+      const replyToggle = item.querySelector(".reply-toggle");
+      const deleteBtn = item.querySelector(".delete-btn");
+      const sendReplyBtn = item.querySelector(".send-reply");
+      const replyInput = item.querySelector(`#reply-input-${id} textarea`);
+      const repliesContainer = item.querySelector(`#replies-${id}`);
+
+      // Like toggle
+      likeBtn.addEventListener("click", async () => {
+        if (!usuario) return alert("Necesitas autenticación anónima (recarga la página si no estás autenticado).");
+        try {
+          const likesArr = d.likes || [];
+          const has = likesArr.includes(usuario.uid);
+          const docRef = doc(db, "foro", id);
+          if (!has) {
+            await updateDoc(docRef, { likes: arrayUnion(usuario.uid) });
+          } else {
+            await updateDoc(docRef, { likes: arrayRemove(usuario.uid) });
+          }
+        } catch (err) { console.error(err); }
+      });
+
+      // Reply toggle
+      replyToggle.addEventListener("click", () => {
+        const box = item.querySelector(`#reply-input-${id}`);
+        box.style.display = box.style.display === "none" ? "flex" : "none";
+      });
+
+      // Send reply
+      sendReplyBtn.addEventListener("click", async () => {
+        const text = replyInput.value.trim();
+        if (!text) return;
+        if (!nombre) return alert("Guarda un nombre antes de responder.");
+        try {
+          // replies as subcollection
+          await addDoc(coll(doc(db, "foro", id), "replies"), {
+            uid: usuario ? usuario.uid : null,
+            nombre,
+            texto: text,
+            createdAt: serverTimestamp()
+          });
+          replyInput.value = "";
+        } catch (err) { console.error("reply error", err); }
+      });
+
+      // Delete
+      if (deleteBtn) {
+        deleteBtn.addEventListener("click", async () => {
+          if (!confirm("¿Eliminar este mensaje? Esta acción no se puede deshacer.")) return;
+          try {
+            // borrar subcollection replies (simple: eliminar cada doc)
+            const repliesCol = coll(doc(db, "foro", id), "replies");
+            // obtener replies y borrarlas
+            const snap = await import("https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js").then(m => m.getDocs ? m : null);
+            // we will remove doc and let replies remain (optional improvement: batch delete)
+            await deleteDoc(doc(db, "foro", id));
+          } catch (err) { console.error("delete err", err); }
+        });
+      }
+
+      // Añadir al DOM
+      listaMensajes.appendChild(item);
+
+      // Render replies en vivo para este mensaje
+      const repliesQuery = query(coll(doc(db, "foro", id), "replies"), orderBy("createdAt", "asc"));
+      onSnapshot(repliesQuery, (snapReplies) => {
+        repliesContainer.innerHTML = "";
+        snapReplies.forEach(rDoc => {
+          const r = rDoc.data();
+          const rEl = document.createElement("div");
+          rEl.className = "reply";
+          rEl.innerHTML = `
+            <div style="display:flex;gap:8px;align-items:center;">
+              <img class="avatar" src="${avatarUrl(r.nombre || r.uid || rDoc.id)}" style="width:40px;height:40px;border-radius:8px;" />
+              <div style="flex:1;">
+                <div style="font-weight:700;color:#136f53;">${escapeHtml(r.nombre || "Invitado")}</div>
+                <div style="font-size:0.85rem;color:#6b7b74;">${r.createdAt ? timeAgo(r.createdAt.toDate ? r.createdAt.toDate() : new Date()) : ""}</div>
+                <div style="margin-top:6px;">${escapeHtml(r.texto)}</div>
+              </div>
+              ${usuario && r.uid && usuario.uid === r.uid ? `<button class="accion-btn" data-reply-id="${rDoc.id}" style="color:#c33;">Eliminar</button>` : ""}
+            </div>
+          `;
+          // eliminar reply si es propio
+          const delBtn = rEl.querySelector(".accion-btn");
+          if (delBtn) {
+            delBtn.addEventListener("click", async () => {
+              if (!confirm("Eliminar respuesta?")) return;
+              try {
+                await deleteDoc(doc(db, "foro", id, "replies", delBtn.dataset.replyId));
+              } catch (err) { console.error(err); }
+            });
+          }
+          repliesContainer.appendChild(rEl);
+        });
+      });
+    }
+
+    // Helpers
+    function escapeHtml(str){
+      if (!str) return "";
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function timeAgo(date){
+      const diff = Math.floor((Date.now() - date.getTime())/1000);
+      if (diff < 10) return "ahora";
+      if (diff < 60) return `${diff}s`;
+      if (diff < 3600) return `${Math.floor(diff/60)}m`;
+      if (diff < 86400) return `${Math.floor(diff/3600)}h`;
+      return `${Math.floor(diff/86400)}d`;
+    }
+
+    // si ya hay nombre en localStorage mostrar preview
+    if (nombre) {
+      nombreMostrar.textContent = nombre;
+      nombreGuardadoSpan.textContent = `Nombre: ${nombre}`;
+      nombreInput.style.display = "none";
+      guardarNombreBtn.style.display = "none";
+      cambiarNombreBtn.style.display = "inline-block";
+      publicarBox.style.display = "block";
+      actualizarAvatarPreview();
+    }
+
+    // detectar cambios en likes para actualizar contador (opcional: usar listener global)
+    // NOTA: el contador se actualiza cuando el mensaje se re-renderiza desde el snapshot.
+  </script>
+</body>
+</html>

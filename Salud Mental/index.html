@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechCare - Salud Mental y Bienestar</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+ <nav>
+  <div class="logo">💚 TechCare</div>
+  
+  <div class="menu-toggle" id="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="Bienestar.html">Blog</a></li>
+    <li><a href="especialistas.html">Especialistas</a></li>
+    <li><a href="foro.html" class="btn">🧵 Ir al Foro</a></li> </ul>
+</nav>
+  </header>
+
+ 
+</div>
+
+   <!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-slider">
+    <div class="slide" style="background-image: url('medios/herobanner.png');"></div>
+    <div class="slide" style="background-image: url('medios/herobanner2.jpg');"></div>
+    <div class="slide" style="background-image: url('medios/herobanner3.png');"></div>
+  </div>
+
+ 
+  <div class="hero-content">
+    <h1>Encuentra apoyo profesional para tu bienestar mental</h1>
+    <p>Habla con un terapeuta certificado hoy mismo y empieza a sentirte mejor.</p>
+
+    <div class="hero-buttons">
+      <a href="#directorio" class="btn btn-primary">📞 Hablar con un terapeuta</a>
+     <a href="tel:+573001234567" class="btn btn-emergency">📱 Llamar ahora</a>
+    </div> 
+</section>
+
+<!-- ¿CÓMO PODEMOS AYUDARTE? -->
+<section class="ayuda-section">
+  <div class="container">
+    <h2>¿Cómo podemos ayudarte?</h2>
+
+    <div class="cards-ayuda">
+
+      <div class="card-ayuda">
+        <img src="medios/apoyo.png" alt="Habla con un terapeuta">
+        <h3><a href="especialistas.html" style="text-decoration: none; color: inherit;">Habla con un terapeuta</a></h3>
+        <p>Consulta con un especialista en línea y recibe la ayuda que necesitas.</p>
+      </div>
+
+      <div class="card-ayuda">
+        <img src="medios/chat.png" alt="Chat de apoyo 24/7">
+        <h3>Chatbot de apoyo 24/7</h3>
+        <p>Habla en cualquier momento con un especialista en salud mental.</p>
+      </div>
+
+      <div class="card-ayuda">
+        <img src="medios/grupos.png" alt="Grupos de apoyo">
+        <h3><a href="foro.html" style="text-decoration: none; color: inherit;">Foro de Apoyo</a></h3>
+        <p>Únete a grupos de apoyo para compartir y recibir apoyo emocional.</p>
+      </div>
+
+      <div class="card-ayuda">
+        <img src="Medios/recursos.png" alt="Recursos útiles">
+        <h3><a href="Bienestar.html" style="text-decoration: none; color: inherit;">Explora Nuestro Blog</a></h3>
+        <p>Accede a meditaciones, ejercicios de respiración y guías de bienestar.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</section>
+
+<!-- Directorio de especialistas -->
+
+<section id="directorio" class="section">
+  <div class="container"> 
+    <h2>Habla con un especialista hoy</h2>
+    <p class="section-subtitle">Selecciona un profesional y contáctalo directamente.</p>
+    
+    <div class="cards" id="lista-especialistas"></div>
+  </div>
+</section>
+
+<!-- carrusel de diapositiva -->
+
+<section class="carousel-fade">
+    <img src="medios/carrusel1.jpg" class="active">
+    <img src="medios/carrusel2.jpg">
+    <img src="medios/carrusel3.jpg">
+    <img src="medios/carrusel4.jpg">
+    <img src="medios/carrusel5.jpg">
+</section>
+
+<!-- Recursos de ayuda -->
+
+<section id="recursos" class="section alt">
+  <h2>Recursos para tu bienestar</h2>
+  <ul class="recursos-lista">
+    <li><a href="#">Meditaciones guiadas</a></li>
+    <li><a href="#">Ejercicios de respiración</a></li>
+    <li><a href="#">Terapia online y grupos de apoyo</a></li>
+    <li><a href="#">Artículos sobre salud mental</a></li>
+  </ul>
+</section>
+
+<!-- Banner ucompensar -->
+
+<section class="banner">
+    <img src="medios/banner.png" alt="Banner principal">
+</section>
+
+
+<!-- formulario de contacto -->
+
+<section id="contacto" class="section">
+  <h2>Contacto</h2>
+  <p>¿Quieres recibir recursos semanales sobre bienestar emocional?</p>
+  <form class="contact-form">
+    <input type="email" placeholder="Tu correo electrónico" required>
+    <button type="submit" class="btn">Suscribirme</button>
+  </form>
+</section>
+
+
+<footer>
+  <p>© 2026 TechCare | Creado con 💚 por estudiantes de la Ucompensar para promover la salud mental</p>
+</footer>
+
+<!-- Chatbot -->
+<div id="chatbot-button">💬</div>
+<div id="chatbot-widget">
+  <iframe
+    src="https://console.dialogflow.com/api-client/demo/embedded/63d1865d-089a-45ff-a5cd-38dc312fcfe"
+    allow="microphone;">
+  </iframe>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+  const chatButton = document.getElementById("chatbot-button");
+  const chatWidget = document.getElementById("chatbot-widget");
+
+  chatButton.addEventListener("click", () => {
+    chatWidget.classList.toggle("open");
+  });
+
+
+</script>
+
+
+
+</body>
+</html>
