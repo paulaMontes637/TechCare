@@ -54,9 +54,9 @@ if (contenedor) {
         const card = document.createElement("div");
         card.className = "card"; 
         
-        // Creamos el mensaje personalizado aquí mismo
+        // Creación del mensaje personalizado
         const mensaje = `Hola ${esp.nombre}, me gustaría agendar una cita con usted.`;
-        // Lo codificamos para que WhatsApp lo lea bien
+        // codificación para que whatsapp lo lea
         const mensajeWA = encodeURIComponent(mensaje);
 
         card.innerHTML = `

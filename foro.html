@@ -12,7 +12,7 @@
 <body>
   <div class="foro-wrap">
     <div class="foro-header">
-      <h1>🧵 Foro Anónimo de la Comunidad</h1>
+      <h1>Foro Anónimo de la Comunidad</h1>
       <a href="index.html" class="btn">← Volver al sitio</a>
     </div>
 
@@ -51,7 +51,7 @@
     } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    // --- TU CONFIG (usa la misma que usas en index.html)
+    // Configuración firebase
     const firebaseConfig = {
       apiKey: "AIzaSyC8lV5AWpT_Kgqr96DMxhNURQNki3OOsSg",
       authDomain: "techcare-69995.firebaseapp.com",
@@ -82,7 +82,7 @@
     let usuario = null; // auth user
     let nombre = localStorage.getItem("tc_nombre") || null;
 
-    // Avatares: dicebear identicon por nombre (si no existe nombre, avatar random por uid)
+    // Avatares
     function avatarUrl(seed){
       return `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(seed)}&scale=80`;
     }
@@ -102,7 +102,7 @@
       usuario = u;
       actualizarAvatarPreview();
 
-      // Si ya tenemos un nombre guardado en localStorage lo mostramos
+      // Mostramos nombre guardado en localStorage 
       if (nombre) {
         nombreMostrar.textContent = nombre;
         nombreGuardadoSpan.textContent = `Nombre: ${nombre}`;
@@ -170,7 +170,7 @@
       }
     });
 
-    // Escuchar mensajes en tiempo real (ordenados por createdAt desc)
+    // Mensajes en tiempo real (ordenados por createdAt desc)
     const q = query(collection(db, "foro"), orderBy("createdAt", "desc"));
     onSnapshot(q, (snap) => {
       listaMensajes.innerHTML = "";
@@ -307,7 +307,7 @@
       });
     }
 
-    // Helpers
+    //prevencion de ataques
     function escapeHtml(str){
       if (!str) return "";
       return String(str)
@@ -338,8 +338,6 @@
       actualizarAvatarPreview();
     }
 
-    // detectar cambios en likes para actualizar contador (opcional: usar listener global)
-    // NOTA: el contador se actualiza cuando el mensaje se re-renderiza desde el snapshot.
   </script>
 </body>
 </html>

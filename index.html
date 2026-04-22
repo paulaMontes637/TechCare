@@ -143,23 +143,13 @@
 </footer>
 
 <!-- Chatbot -->
-<div id="chatbot-button">💬</div>
-<div id="chatbot-widget">
-  <iframe
-    src="https://console.dialogflow.com/api-client/demo/embedded/63d1865d-089a-45ff-a5cd-38dc312fcfe"
-    allow="microphone;">
-  </iframe>
-</div>
-
-<script src="script.js"></script>
-
-<script>
-  const chatButton = document.getElementById("chatbot-button");
-  const chatWidget = document.getElementById("chatbot-widget");
-
-  chatButton.addEventListener("click", () => {
-    chatWidget.classList.toggle("open");
-  });
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="Armonia"
+  agent-id="63d1865d-089a-45ff-a5cd-38dc312fcfea"
+  language-code="es"
+></df-messenger>
 
 
 </script>
