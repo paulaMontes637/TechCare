@@ -157,15 +157,25 @@
         </section>
     </main>
 
-    <!-- Chatbot -->
+<!-- Chatbot -->
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
+  intent="WELCOME"
   chat-title="Armonia"
-  agent-id="7c624e29-9867-4185-875d-e840c2363ab5"
+  agent-id="63d1865d-089a-45ff-a5cd-38dc312fcfea"
   language-code="es"
   chat-icon="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+
+  window.addEventListener('dfMessengerMessagingResponse', function (event) {
+  // Si el bot responde o el usuario elige la opción del foro
+  const queryText = event.detail.response.queryResult.queryText;
+  if (queryText === "Ver foro 💚") {
+    window.location.href = "foro.html";
+  }
+});
 ></df-messenger>
 
+</script>
 
     <footer>
         <p>© 2026 TechCare | Creado con 💚 para promover la salud mental</p>
