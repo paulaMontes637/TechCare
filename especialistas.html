@@ -10,7 +10,11 @@
 <body>
     <header>
         <nav>
-            <div class="logo">💚 TechCare</div>
+  <div class="logo">
+  <a href="index.html" style="text-decoration: none; color: inherit;">
+    💚 TechCare
+  </a>
+</div>
             <div class="menu-toggle" id="mobile-menu">
                 <span></span><span></span><span></span>
             </div>
@@ -43,7 +47,7 @@
                             <div class="success-case">
                                 <strong>Caso de éxito:</strong> Logró que más de 50 personas con fobia social severa lograran reintegrarse con éxito a actividades grupales y laborales, mejorando drásticamente su calidad de vida.
                             </div>
-                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                            <button class="btn btn-menta contactar-btn" data-doctor="Luisa Benitez" data-phone="573027448717">Reservar Cita</button>
                         </div>
                     </div>
 
@@ -56,7 +60,7 @@
                             <div class="success-case">
                                 <strong>Caso de éxito:</strong> Fue el arquitecto del programa "Familias Conectadas", una iniciativa que logró reducir los niveles de aislamiento y soledad en jóvenes en un 30% mediante el fomento de una comunicación digital saludable.</p>
                             </div>
-                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                            <button class="btn btn-menta contactar-btn" data-doctor="Jhon Murillo" data-phone="573027448717">Reservar Cita</button>
                         </div>
                     </div>
 
@@ -69,7 +73,7 @@
                             <div class="success-case">
                                 <strong>Caso de éxito:</strong>Diseñó e implementó un protocolo innovador de "pausas activas mentales" adoptado por grandes empresas tecnológicas, logrando una reducción significativa en los errores operativos causados por fatiga mental.</p>
                             </div>
-                            <button class="btn btn-menta contactar-btn">Reservar Cita</button>
+                            <button class="btn btn-menta contactar-btn" data-doctor="Camilo Cruz" data-phone="573027448717">Reservar Cita</button>
                         </div>
                     </div>
                 </div>
@@ -81,7 +85,7 @@
         <p>© 2026 TechCare | Creado con 💚 para promover la salud mental</p>
     </footer>
 
-    <script src="script-especialistas.js"></script>
+    <script src="script.js"></script>
     <script>
         // Mantenemos la funcionalidad del menú hamburguesa que ya tienes
         const menuToggle = document.getElementById('mobile-menu');
@@ -90,5 +94,14 @@
             navLinks.classList.toggle('active');
         });
     </script>
+    
+    <!-- Chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  chat-title="Armonia"
+  agent-id="7c624e29-9867-4185-875d-e840c2363ab5"
+  language-code="es"
+  chat-icon="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+></df-messenger>
 </body>
 </html>

@@ -215,7 +215,7 @@ nav {
 }
 
 .btn:hover {
-  background-color: #238c6d;
+  background-color: #cfe3dd;
   color: white;
 }
 
@@ -523,20 +523,31 @@ footer {
 
 
 /* ========================================= */
-/* ✨ ESTILOS MODERNOS Y LIMPIOS (Verde Menta) */
-/* Reemplaza la sección del foro en tu style.css con este código. */
+/* ESTILOS foro */
 /* ========================================= */
 
-/* Tipografía y Fondo General */
-body { 
-    background-color: #f7f9fc; /* Fondo muy claro y suave */
-    color: #333333; 
-    font-family: 'Inter', sans-serif; /* Fuente limpia y moderna */
-    line-height: 1.5;
-    margin: 0;
+/* 1. IMPORTACIÓN Y VARIABLES (Agrégalo al inicio) */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+  --primary: #1abf9a;
+  --primary-dark: #136f53;
+  --bg-gradient: linear-gradient(135deg, #f0f7f4 0%, #e6f0ed 100%);
+  --glass-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* Contenedor Principal */
+/* 2. CUERPO Y FONDO (Actualiza tu bloque body) */
+body { 
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: #2d3748;
+    line-height: 1.5;
+}
+
+/* 3. CONTENEDOR PRINCIPAL */
 .foro-wrap { 
     max-width: 980px; 
     margin: 40px auto; 
@@ -544,280 +555,123 @@ body {
     padding-top: 0;
 }
 
-/* Encabezado */
+/* 4. ENCABEZADO (Estilo moderno) */
 .foro-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     gap: 12px; 
-    margin-bottom: 30px; /* Más espacio */
+    margin-bottom: 30px; 
     padding: 20px 0 10px 0;
-    border-bottom: 1px solid #eeeeee; /* Separador sutil */
+    border-bottom: 2px solid rgba(26, 191, 154, 0.1);
 }
 
 .foro-header h1 { 
     margin: 0; 
-    font-size: 2rem; /* Título más grande */
-    color: #1a1a1a; /* Negro para alto contraste */
+    font-size: 1.8rem; 
     font-weight: 800;
+    color: var(--primary-dark);
+    letter-spacing: -0.5px;
 }
 
-/* Botones Generales */
+/* 5. BOTONES (Efecto elevación) */
 .btn { 
-    cursor: pointer; 
-    border: none;
-    background-color: #1abc9c; /* 🌿 COLOR VERDE MENTA */
+    background: var(--primary);
     color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px; /* Más redondeado */
     font-weight: 600;
-    transition: background-color 0.2s, transform 0.1s;
-    text-decoration: none; /* Para el botón "Volver" */
-    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(26, 191, 154, 0.2);
 }
+
 .btn:hover {
-    background-color: #16a085; /* Tono de menta más oscuro para el hover */
-    transform: translateY(-1px);
-}
-.btn:active {
-    transform: translateY(0);
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(26, 191, 154, 0.3);
 }
 
-/* --- Área de Nombre/Perfil --- */
-.nombre-box { 
-    background: #ffffff; 
-    padding: 20px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra más limpia */
-    display: flex; 
-    gap: 15px; 
-    align-items: center; 
-    border-left: 5px solid #1abc9c; /* 🌿 BORDE DE ACENTO VERDE MENTA */
+/* 6. CAJAS CON EFECTO CRISTAL (nombre-box, publicar-box y mensajes) */
+.nombre-box, .publicar-box, .mensaje {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
 }
 
-.nombre-box input { 
-    padding: 12px; 
-    border-radius: 6px; 
-    border: 1px solid #dddddd; 
-    flex: 1; 
+/* 7. INPUTS Y TEXTAREAS */
+input, textarea {
+    width: 100%;
+    border: 2px solid #e6f3ee;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
 }
-.nombre-box input:focus {
-    border-color: #1abc9c; /* 🌿 FOCO VERDE MENTA */
+
+input:focus, textarea:focus {
     outline: none;
+    border-color: var(--primary);
+    background: #fff;
 }
 
-.small { 
-    font-size: 0.85rem; 
-    color: #6c757d; 
+/* 8. AVATARES Y DETALLES DE MENSAJES */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: #fff;
+    border: 2px solid #e6f3ee;
+    margin-right: 15px;
+    flex-shrink: 0;
 }
 
-/* Botones en el área de nombre */
-#cambiar-nombre {
-    background: #f8f9fa !important;
-    border: 1px solid #ced4da !important;
-    color: #333 !important;
-    padding: 8px 15px !important;
-    border-radius: 6px !important;
-}
-#cambiar-nombre:hover {
-    background: #e9ecef !important;
+.mensaje .nombre {
+    font-weight: 700;
+    color: var(--primary-dark);
 }
 
-/* --- Formulario de Publicación --- */
-.publicar-box { 
-    margin-top: 30px; 
-    background: #ffffff; 
-    padding: 20px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+.mensaje .fecha {
+    font-size: 0.8rem;
+    color: #a0aec0;
 }
 
-.publicar-box textarea { 
-    width: 100%; 
-    min-height: 100px; /* Más alto */
-    padding: 15px; 
-    border-radius: 6px; 
-    border: 1px solid #dddddd; 
-    resize: vertical; 
-    font-size: 1rem;
-    box-sizing: border-box; /* Importante para el 100% de ancho */
-    transition: border-color 0.2s;
-}
-.publicar-box textarea:focus {
-    border-color: #1abc9c; /* 🌿 FOCO VERDE MENTA */
-    outline: none;
+.accion-btn {
+    background: transparent;
+    border: none;
+    color: #718096;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-right: 15px;
+    padding: 5px 0;
+    transition: color 0.2s;
 }
 
-.row { 
-    display: flex; 
-    gap: 10px; 
-    align-items: center; 
-    margin-top: 15px; 
+.accion-btn:hover {
+    color: var(--primary);
 }
 
-/* --- Listado de Mensajes (Posts) --- */
-.lista-mensajes { 
-    margin-top: 30px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; /* Más separación entre posts */
-}
-
-/* Estilo de cada Mensaje (La "Card" principal) */
-.mensaje { 
-    background: white; 
-    padding: 20px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra más sutil */
-    display: flex; 
-    gap: 15px; 
-    align-items: flex-start; 
-    border: 1px solid #f0f0f0; /* Borde sutil para definir la tarjeta */
-}
-
-.avatar { 
-    width: 48px; 
-    height: 48px; 
-    border-radius: 8px; /* Avatar cuadrado/redondeado moderno */
-    flex-shrink: 0; 
-    overflow: hidden; 
-    display: block; 
-}
-
-.contenido { 
-    flex: 1; 
-}
-
-.meta { 
-    display: flex; 
-    gap: 10px; 
-    align-items: baseline; /* Alinea los elementos en la línea de base */
-    margin-bottom: 8px; 
-}
-
-.nombre { 
-    font-weight: 700; 
-    color: #1a1a1a; 
-    font-size: 1rem;
-}
-
-.fecha { 
-    font-size: 0.8rem; 
-    color: #999999; 
-    margin-left: -5px; /* Ajuste visual */
-}
-
-.texto { 
-    margin-top: 5px; 
-    white-space: pre-wrap; 
-    color: #333333;
-    font-size: 1rem;
-}
-
-/* --- Acciones (Like, Responder, Eliminar) --- */
-.acciones { 
-    margin-top: 12px; 
-    display: flex; 
-    gap: 12px; 
-    align-items: center; 
-    padding-top: 5px;
-    border-top: 1px solid #f7f7f7; /* Separador de acciones */
-}
-
-.accion-btn { 
-    background: transparent; 
-    border: 0; 
-    cursor: pointer; 
-    padding: 8px 10px; 
-    border-radius: 4px; 
-    font-weight: 500; 
-    color: #6c757d; /* Color gris suave */
-    font-size: 0.9rem;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.accion-btn:hover { 
-    background: #f1f4f8; 
-    color: #1abc9c; /* 🌿 HOVER TEXTO VERDE MENTA */
-}
-.accion-btn.like-btn .like-count {
-    font-weight: 600;
-    color: #1abc9c; /* 🌿 CONTADOR VERDE MENTA */
-    margin-left: 3px;
-}
-.accion-btn.delete-btn {
-    color: #dc3545 !important;
-}
-.accion-btn.delete-btn:hover {
-    background: #f8d7da;
-}
-
-/* --- Respuestas (Replies) --- */
+/* 9. RESPUESTAS (Mantenemos tu lógica de indentación) */
 .replies { 
     margin-top: 15px; 
-    margin-left: 63px; /* Alineación debajo del contenido del post */
+    margin-left: 65px; 
     padding-left: 10px;
-    border-left: 3px solid #e9ecef; /* Barra lateral de indentación */
+    border-left: 3px solid rgba(26, 191, 154, 0.2); 
     display: flex; 
     flex-direction: column; 
     gap: 10px; 
 }
-
-.reply { 
-    background: #ffffff; 
-    padding: 12px; 
-    border-radius: 8px; 
-    border: 1px solid #f0f0f0;
-    font-size: 0.95rem;
-}
-
-.reply-input { 
-    display: flex; 
-    gap: 8px; 
-    align-items: flex-end; 
-    margin-top: 10px; 
-}
-
-.reply-input textarea { 
-    flex: 1; 
-    min-height: 40px; 
-    border-radius: 6px; 
-    padding: 10px; 
-    border: 1px solid #dddddd;
-    resize: vertical;
-}
-
-.reply-input .btn {
-    padding: 8px 15px;
-}
-
-/* Media Queries (Responsive) */
-@media (max-width: 720px){
-    .foro-wrap {
-        margin: 20px 10px;
-        padding: 0;
-    }
-    .foro-header {
-        margin-bottom: 20px;
-    }
-    .mensaje { 
-        flex-direction: column; 
-        gap: 10px;
-    }
-    .avatar{ 
-        width: 40px; 
-        height: 40px; 
-    }
-    .replies { 
-        margin-left: 0; 
-        padding-left: 15px;
-    }
-    .meta {
-        align-items: center;
-    }}
-
 
 /* Estilos de Bienestar */
 

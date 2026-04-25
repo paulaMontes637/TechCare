@@ -23,7 +23,7 @@
         <input id="nombre-usuario" placeholder="Elige un nombre público (mínimo 3 caracteres)" />
         <div style="display:flex;gap:8px;margin-top:8px;">
           <button id="guardar-nombre" class="btn">Guardar nombre</button>
-          <button id="cambiar-nombre" class="btn" style="display:none;background:#fff;border:1px solid #e6f3ee;padding:8px 12px;border-radius:10px;">Cambiar</button>
+          <button id="cambiar-nombre" class="btn">Cambiar nombre</button>
           <span id="nombre-guardado" class="small" style="margin-left:auto;"></span>
         </div>
       </div>
@@ -339,5 +339,15 @@
     }
 
   </script>
+
+  <!-- Chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  chat-title="Armonia"
+  agent-id="7c624e29-9867-4185-875d-e840c2363ab5"
+  language-code="es"
+  chat-icon="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+></df-messenger>
+
 </body>
 </html>

@@ -123,6 +123,19 @@ const botonesContactar = document.querySelectorAll('.contactar-btn');
     botonesContactar.forEach(boton => {
         boton.addEventListener('click', (e) => {
             const especialista = e.target.parentElement.querySelector('h3').innerText;
-            alert(`¡Gracias por tu interés! Pronto te redirigiremos a la agenda de: ${especialista}`);
+            alert(`¡Gracias por tu interés! te redirigiremos a la agenda de: ${especialista}`);
         });
     });
+
+    document.querySelectorAll('.contactar-btn').forEach(boton => {
+    boton.addEventListener('click', function() {
+        const telefono = this.getAttribute('data-phone');
+        const nombreDoctor = this.getAttribute('data-doctor');
+        
+        // Mensaje personalizado
+        const mensaje = encodeURIComponent(`Hola, me gustaría reservar una cita con el Dr. ${nombreDoctor}. Vengo desde la plataforma TechCare.`);
+        
+        // Abrir WhatsApp
+        window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+    });
+});

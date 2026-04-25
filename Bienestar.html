@@ -11,7 +11,11 @@
 <body>
     <header>
         <nav>
-            <div class="logo">💚 TechCare</div>
+             <div class="logo">
+  <a href="index.html" style="text-decoration: none; color: inherit;">
+    💚 TechCare
+  </a>
+</div>
             
             <div class="menu-toggle" id="mobile-menu">
                 <span></span>
@@ -81,8 +85,11 @@
                     <p>Dedica 5 minutos a respirar profundamente y observar tu entorno. Esto rompe ciclos de estrés y recarga tu energía.</p>
                     <div class="mensaje-revelado">
                         "La paz interior empieza en el momento en que decides no permitir que otra persona o evento controle tus emociones."
-                    <button class="btn-video">Ver video</button>
                     </div>
+                        <a href="https://www.youtube.com/watch?v=9-IOMXpv7Ys" target="_blank" style="text-decoration: none;">
+                    <button class="btn-video">Ver video</button>
+                    </a>
+                    
                 </div>
             </div>
             
@@ -93,8 +100,11 @@
                     
                     <div class="mensaje-revelado">
                         "Tu cuerpo es tu compañero de vida. Cuídalo, muévelo y agradécele por todo lo que te permite lograr hoy."
-                        <button class="btn-video">Ver video</button>
-                    </div>
+                    </div>     
+                        <a href="https://www.youtube.com/watch?v=oHMpC-mR6qU" target="_blank" style="text-decoration: none;">
+                    <button class="btn-video">Ver video</button>
+                    </a>
+                    
                 </div>
             </div>
             
@@ -104,7 +114,9 @@
                     <p>Define horarios libres de pantallas antes de dormir para reducir la fatiga mental y mejorar el descanso.</p>
                    <div class="mensaje-revelado">
                         "Desconectarse para conectar con uno mismo no es un lujo, es una necesidad para tu salud mental."
-                     <button class="btn-video">Ver video</button>
+                     <a href="https://www.youtube.com/watch?v=KxRpK9ZGq4Y" target="_blank" style="text-decoration: none;">
+                    <button class="btn-video">Ver video</button>
+                    </a>
                     </div>
                 </div>
             </div>
@@ -115,8 +127,12 @@
                     <p>Escribir 3 cosas que agradeces al día entrena tu cerebro para enfocarse en lo positivo y elevar tu ánimo.</p>
                     <div class="mensaje-revelado">
                         "La gratitud convierte lo que tenemos en suficiente. Aprender a ver lo bueno atrae más cosas buenas a tu vida."
-                     <button class="btn-video">Ver video</button>
-                    </div>
+                    </div> 
+                        <a href="https://www.youtube.com/watch?v=N5nhap0PPwg" target="_blank" style="text-decoration: none;">
+                    <button class="btn-video">Ver video</button>
+                    </a>
+                     
+                    
                 </div>
             </div>
         </div>
@@ -135,16 +151,21 @@
                 <div class="card cta-card">
                     <h3>Contactar un Especialista</h3>
                     <p>Encuentra un profesional que te guíe en tu camino.</p>
-                    <a href="index.html#especialistas" class="btn btn-menta">Ver Directorio</a>
+                    <a href="especialistas.html" class="btn btn-menta">Ver Directorio</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="chatbot-button">💬</div>
-    <div id="chatbot-widget">
-        <iframe src="https://console.dialogflow.com/api-client/demo/embedded/63d1865d-089a-45ff-a5cd-38dc312fcfe" allow="microphone;"></iframe>
-    </div>
+    <!-- Chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  chat-title="Armonia"
+  agent-id="7c624e29-9867-4185-875d-e840c2363ab5"
+  language-code="es"
+  chat-icon="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+></df-messenger>
+
 
     <footer>
         <p>© 2026 TechCare | Creado con 💚 para promover la salud mental</p>
@@ -157,13 +178,6 @@
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-        });
-
-        // Chatbot
-        const chatButton = document.getElementById("chatbot-button");
-        const chatWidget = document.getElementById("chatbot-widget");
-        chatButton.addEventListener("click", () => {
-            chatWidget.classList.toggle("open");
         });
 
         // Acordeón
