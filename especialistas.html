@@ -103,5 +103,18 @@
   language-code="es"
   chat-icon="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
 ></df-messenger>
+
+<script>
+  
+  window.addEventListener('dfMessengerMessagingResponse', function (event) {
+  // Si el bot responde o el usuario elige la opción del foro
+  const queryText = event.detail.response.queryResult.queryText;
+  if (queryText === "Ver foro 💚") {
+    window.location.href = "foro.html";
+  }
+});
+</script>
+
+
 </body>
 </html>
